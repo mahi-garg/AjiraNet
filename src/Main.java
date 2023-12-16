@@ -1,6 +1,6 @@
-import models.*;
-import services.AjiraNetService;
-import utils.ValidationUtils;
+import com.ajiranet.models.*;
+import com.ajiranet.services.AjiraNetService;
+import com.ajiranet.utils.ValidationUtils;
 
 import java.util.Arrays;
 import java.util.List;
