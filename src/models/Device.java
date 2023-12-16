@@ -22,19 +22,11 @@ public class Device {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public DeviceType getDeviceType() {
         return deviceType;
     }
 
-    public void setDeviceType(DeviceType deviceType) {
-        this.deviceType = deviceType;
-    }
-
-    public int getWeight() {
+    public int getStrength() {
         return strength;
     }
 
@@ -46,7 +38,4 @@ public class Device {
         return devices;
     }
 
-    public void setDevices(List<Device> devices) {
-        this.devices = devices;
-    }
 }

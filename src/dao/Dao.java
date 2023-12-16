@@ -14,13 +14,12 @@ public interface Dao {
     public Collection<Device> getAllDevices();
     public Device getDevice(String deviceId);
 
-    public Boolean doesConnectionExist(Device device1, Device device2);
+    public Boolean doesConnectionExist(Device deviceA, Device deviceB);
 
-    public void addConnection(Device device1, Device device2);
+    public void addConnection(Device deviceA, Device deviceB);
 
     public void setDeviceStrength(String deviceId,  int strength);
 
     public Boolean isRepeater(String deviceId);
 
-   // public List<Device> getRouteInfo(Device device1, Device device2);
 }

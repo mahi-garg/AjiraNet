@@ -6,25 +6,41 @@ import exception.InvalidStrengthException;
 import models.*;
 
 
+
 public class ValidationUtils {
+
+    private static void validateCommandLength(int length, int requiredLength, CommandType commandType) throws InvalidArgumentCountException {
+        if (length != requiredLength) {
+            throw new InvalidArgumentCountException("Invalid arguments given to " + commandType  + ". Required length is " + requiredLength + "!");
+        }
+    }
     public static Command validateAndGet(String commandStr) throws InvalidArgumentCountException, InvalidCommandException, InvalidDeviceException, InvalidStrengthException {
         String[] tokens = commandStr.split(" ");
-        String commandTypeStr = tokens[0].toUpperCase();
-        if (tokens.length != 3) {
-            throw new InvalidArgumentCountException("Number of arguments given to Add statement are not 3!");
+        if(tokens.length == 0){
+            throw new InvalidCommandException("command is null");
         }
+
+        String commandTypeStr = tokens[0].toUpperCase();
         CommandType commandType = getCommandType(commandTypeStr);
+
         switch (commandType) {
             case ADD:
+                validateCommandLength(tokens.length, 3, CommandType.ADD);
                 DeviceType deviceType = getDeviceType(tokens[1]);
                 String id = tokens[2];
                 return new AddCommand(deviceType, id);
             case CONNECT:
+                validateCommandLength(tokens.length, 3, CommandType.CONNECT);
                 return new ConnectCommand(tokens[1], tokens[2]);
             case INFO_ROUTE:
+                validateCommandLength(tokens.length,3 , CommandType.INFO_ROUTE);
                 return new InfoRouteCommand(tokens[1], tokens[2]);
             case SET_DEVICE_STRENGTH:
-                return new SetDeviceStrengthCommand(tokens[1], getIntStrength(tokens[2]));
+                validateCommandLength(tokens.length, 3, CommandType.SET_DEVICE_STRENGTH);
+                return new SetDeviceStrengthCommand(tokens[1], getIntStrength(tokens[2]) );
+            case EXIT:
+                validateCommandLength(tokens.length, 1, CommandType.EXIT);
+                return new ExitCommand();
             default:
                 throw new InvalidCommandException("Invalid command " + commandTypeStr);
         }

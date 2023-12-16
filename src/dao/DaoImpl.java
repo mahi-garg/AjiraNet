@@ -5,7 +5,6 @@ import models.Device;
 import models.DeviceType;
 
 import java.util.Collection;
-import java.util.List;
 
 public class DaoImpl implements Dao{
 
@@ -31,18 +30,18 @@ public class DaoImpl implements Dao{
         return db.getDb().get(deviceId);
     }
 
-    public Boolean doesConnectionExist(Device device1, Device device2){
+    public Boolean doesConnectionExist(Device deviceA, Device deviceB){
 
-        String id1 = device1.getId();
-        String id2 = device2.getId();
-        return db.getDb().get(id1).getDevices().contains(device2);
+        String id1 = deviceA.getId();
+        String id2 = deviceB.getId();
+        return db.getDb().get(id1).getDevices().contains(deviceB);
     }
     @Override
-    public void addConnection(Device device1, Device device2) {
-        String id1 = device1.getId();
-        String id2 = device2.getId();
-        db.getDb().get(id1).getDevices().add(device2);
-        db.getDb().get(id2).getDevices().add(device1);
+    public void addConnection(Device deviceA, Device deviceB) {
+        String id1 = deviceA.getId();
+        String id2 = deviceB.getId();
+        db.getDb().get(id1).getDevices().add(deviceB);
+        db.getDb().get(id2).getDevices().add(deviceA);
     }
 
     @Override
@@ -52,11 +51,6 @@ public class DaoImpl implements Dao{
 
     @Override
     public Boolean isRepeater(String deviceId) {
-        return db.getDb().get(deviceId).getDeviceType().equals(DeviceType.Repeater);
+        return db.getDb().get(deviceId).getDeviceType().equals(DeviceType.REPEATER);
     }
-
-//    @Override
-//    public List<Device> getRouteInfo(Device device1, Device device2) {
-//        return null;
-//    }
 }
